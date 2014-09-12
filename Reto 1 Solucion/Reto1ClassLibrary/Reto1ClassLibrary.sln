@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reto1ClassLibrary", "Reto1ClassLibrary\Reto1ClassLibrary.csproj", "{E5FC2BA8-F353-42F1-A798-5174854397E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reto1UnitTest", "Reto1UnitTest\Reto1UnitTest.csproj", "{ADAB5C0C-0485-4589-A5B4-0B244E956048}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5FC2BA8-F353-42F1-A798-5174854397E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5FC2BA8-F353-42F1-A798-5174854397E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5FC2BA8-F353-42F1-A798-5174854397E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5FC2BA8-F353-42F1-A798-5174854397E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADAB5C0C-0485-4589-A5B4-0B244E956048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADAB5C0C-0485-4589-A5B4-0B244E956048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADAB5C0C-0485-4589-A5B4-0B244E956048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADAB5C0C-0485-4589-A5B4-0B244E956048}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
