@@ -1,0 +1,17 @@
+﻿<Window x:Class="Reto2WPFApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reto 2" Height="500" Width="500">
+    
+    <StackPanel>
+        <TextBlock Text="Botones a pulsar en cualquier orden" Margin="10"/>
+        <Button x:Name="Button1" Content="Botón 1" Click="OnButtonClick"/>
+        <Button x:Name="Button2" Content="Botón 2" Click="OnButtonClick"/>
+        <Button x:Name="Button3" Content="Botón 3" Click="OnButtonClick"/>
+        <Button x:Name="Button4" Content="Botón 4" Click="OnButtonClick"/>
+        <Button x:Name="Button5" Content="Botón 5" Click="OnButtonClick"/>
+        <Button x:Name="Button6" Content="Botón 6" Click="OnButtonClick"/>
+        <TextBlock Text="Botón a pulsar cuando acabes con los otros" Margin="10"/>
+        <Button x:Name="ExecuteButton" Content="Ejecuta" IsEnabled="False" Click="OnExecuteClick"/>
+    </StackPanel>
+</Window>
