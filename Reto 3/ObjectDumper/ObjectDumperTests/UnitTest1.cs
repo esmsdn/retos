@@ -12,6 +12,14 @@ namespace ObjectDumperTests
     public class UnitTest1
     {
         [TestMethod]
+        public void Dumping_Null_Returns_Empty_Collection()
+        {
+            var dumper = new ObjectDumper<Test1Class>();
+            var result = dumper.Dump(null);
+            Assert.IsFalse(result.Any());
+        }
+
+        [TestMethod]
         public void Only_Properties_With_Getter_Are_Dump()
         {
             var dumper = new ObjectDumper<Test1Class>();
@@ -54,7 +62,7 @@ namespace ObjectDumperTests
             };
 
             var desc = dumper.Dump(data);
-            Assert.IsNotNull(desc.SingleOrDefault(kvp => kvp.Key == "Value" && kvp.Value == IS_NOT_42));
+            Assert.IsTrue(desc.Any(kvp => kvp.Key == "Value" && kvp.Value == IS_42));
         }
 
         [TestMethod]
@@ -73,7 +81,7 @@ namespace ObjectDumperTests
             var dumper = new ObjectDumper<Ufo>();
             dumper.AddTemplateFor(u => u.Origin, o => string.Format("Planet: {0}", o.Name));
             var desc = dumper.Dump(ufo);
-            Assert.IsNotNull(desc.SingleOrDefault(kvp =>
+            Assert.IsTrue(desc.Any(kvp =>
                 kvp.Key == "Origin" && kvp.Value == string.Format("Planet: {0}", ufo.Origin.Name)));
         }
 
