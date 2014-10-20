@@ -21,6 +21,27 @@ namespace UnitTestProject
         }
 
         [TestMethod]
+        public void TestShuffle2Items()
+        {
+            List<int> original = new List<int>() { 0, 1 };
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            List<int> shuffled = original.Shuffle();
+
+            stopwatch.Stop();
+            Console.WriteLine(string.Format("Shuffling 2 items took {0} milliseconds or {1} ticks", stopwatch.ElapsedMilliseconds, stopwatch.ElapsedTicks));
+
+            Assert.AreEqual(original.Count, shuffled.Count);
+            CollectionAssert.AllItemsAreUnique(shuffled);
+            for (int index = 0; index < shuffled.Count; index++)
+            {
+                Assert.AreNotEqual(original[index], shuffled[index]);
+            }
+        }
+
+        [TestMethod]
         public void TestShuffle3Items()
         {
             List<int> original = new List<int>() { 0, 1, 2 };
@@ -33,6 +54,7 @@ namespace UnitTestProject
             stopwatch.Stop();
             Console.WriteLine(string.Format("Shuffling 3 items took {0} milliseconds or {1} ticks", stopwatch.ElapsedMilliseconds, stopwatch.ElapsedTicks));
 
+            Assert.AreEqual(original.Count, shuffled.Count);
             CollectionAssert.AllItemsAreUnique(shuffled);
             for (int index = 0; index < shuffled.Count; index++)
             {
@@ -53,6 +75,7 @@ namespace UnitTestProject
             stopwatch.Stop();
             Console.WriteLine(string.Format("Shuffling 10,000 items took {0} milliseconds or {1} ticks", stopwatch.ElapsedMilliseconds, stopwatch.ElapsedTicks));
 
+            Assert.AreEqual(original.Count, shuffled.Count);
             CollectionAssert.AllItemsAreUnique(shuffled);
             for (int index = 0; index < shuffled.Count; index++)
             {
@@ -73,6 +96,7 @@ namespace UnitTestProject
             stopwatch.Stop();
             Console.WriteLine(string.Format("Shuffling 100,000 items took {0} milliseconds or {1} ticks", stopwatch.ElapsedMilliseconds, stopwatch.ElapsedTicks));
 
+            Assert.AreEqual(original.Count, shuffled.Count);
             CollectionAssert.AllItemsAreUnique(shuffled);
             for (int index = 0; index < shuffled.Count; index++)
             {
@@ -93,6 +117,7 @@ namespace UnitTestProject
             stopwatch.Stop();
             Console.WriteLine(string.Format("Shuffling 10,000,000 items took {0} milliseconds or {1} ticks", stopwatch.ElapsedMilliseconds, stopwatch.ElapsedTicks));
 
+            Assert.AreEqual(original.Count, shuffled.Count);
             CollectionAssert.AllItemsAreUnique(shuffled);
             for (int index = 0; index < shuffled.Count; index++)
             {
