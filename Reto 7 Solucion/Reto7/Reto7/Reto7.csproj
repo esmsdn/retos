@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="JsonSplitter3.cs" />
-    <Compile Include="JsonSplitter2.cs" />
+    <Compile Include="JsonSplitter3.cs" />
+    <None Include="JsonSplitter2.cs" />
     <None Include="JsonSplitter1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
