@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reto7", "Reto7\Reto7.csproj", "{A56BD3DF-7147-45EA-911C-2B184A870C15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{166FF56E-7F19-472D-9CB5-350CB8C33874}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A56BD3DF-7147-45EA-911C-2B184A870C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A56BD3DF-7147-45EA-911C-2B184A870C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A56BD3DF-7147-45EA-911C-2B184A870C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A56BD3DF-7147-45EA-911C-2B184A870C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166FF56E-7F19-472D-9CB5-350CB8C33874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166FF56E-7F19-472D-9CB5-350CB8C33874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166FF56E-7F19-472D-9CB5-350CB8C33874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166FF56E-7F19-472D-9CB5-350CB8C33874}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
