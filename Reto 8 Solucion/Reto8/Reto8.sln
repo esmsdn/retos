@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reto8", "Reto8\Reto8.csproj", "{432AA86E-9545-49BE-B4EF-375541611D2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestReto8", "UnitTestReto8\UnitTestReto8.csproj", "{2A35DBB9-4E6C-4715-B53D-50C9B42407D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{432AA86E-9545-49BE-B4EF-375541611D2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{432AA86E-9545-49BE-B4EF-375541611D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{432AA86E-9545-49BE-B4EF-375541611D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{432AA86E-9545-49BE-B4EF-375541611D2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A35DBB9-4E6C-4715-B53D-50C9B42407D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A35DBB9-4E6C-4715-B53D-50C9B42407D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A35DBB9-4E6C-4715-B53D-50C9B42407D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A35DBB9-4E6C-4715-B53D-50C9B42407D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
