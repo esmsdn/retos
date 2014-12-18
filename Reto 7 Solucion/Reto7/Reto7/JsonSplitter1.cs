@@ -12,6 +12,7 @@ namespace Reto7
             var split =
                 JArray.Parse(json)
                     .GroupBy(s => s["genres"].Values<string>().Contains(genre))
+                    .OrderBy(g => g.Key)
                     .Select(g => (new JArray(g)).ToString(Formatting.None))
                     .ToList();
             return new Tuple<string, string>(split[1], split[0]);
