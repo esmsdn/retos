@@ -1,0 +1,473 @@
+﻿<base:BasePage
+    x:Class="SudokuApp.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SudokuApp"
+    xmlns:base="using:SudokuApp.Views.Base"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{StaticResource PageBackgroundColorBrush}"
+    DataContext="{Binding Path=MainViewModel, Source={StaticResource Locator}}">
+    
+    <!-- Recursos de la página -->
+    <base:BasePage.Resources>
+        
+        <!-- Estilo de los campos de texto usados como celdas del tablero -->
+        <x:Double x:Key="TextControlThemeMinWidth">34</x:Double>
+        <x:Double x:Key="TextControlThemeMinHeight">34</x:Double>
+        <Thickness x:Key="TextControlBorderThemeThickness">2</Thickness>
+        <FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
+        <x:Double x:Key="ContentControlFontSize">20.26</x:Double>
+        <Thickness x:Key="TextControlThemePadding">10,0.8,8,0</Thickness>
+        <Thickness x:Key="TextControlMarginThemeThickness">0</Thickness>
+        <Thickness x:Key="TextControlHeaderMarginThemeThickness">0,0,0,4.8</Thickness>
+        <x:Double x:Key="TextControlBorderThemeOpacity">1</x:Double>
+        <Style TargetType="TextBox">
+            <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
+            <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
+            <Setter Property="Width" Value="{ThemeResource TextControlThemeMinWidth}"/>
+            <Setter Property="Height" Value="{ThemeResource TextControlThemeMinHeight}"/>
+            <Setter Property="Foreground" Value="{StaticResource BrandColorBrush}"/>
+            <Setter Property="SelectionHighlightColor" Value="{StaticResource BrandLighterColorBrush}"/>
+            <Setter Property="Background" Value="{StaticResource BrandLighterColorBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PageBackgroundColorBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}"/>
+            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ContentControlFontSize}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+            <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}"/>
+            <Setter Property="Margin" Value="{ThemeResource TextControlMarginThemeThickness}"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="MaxLength" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid Background="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BorderElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandDarkerColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandLightColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandLightColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="PlaceholderTextContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandLightColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="HeaderContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandLightColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="{ThemeResource TextControlBorderThemeOpacity}" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BorderElement"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandLightColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PlaceholderTextContentPresenter"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BorderElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PageBackgroundColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="BorderElement" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1"/>
+                            <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Margin="{ThemeResource TextControlHeaderMarginThemeThickness}" Grid.Row="0" Style="{StaticResource HeaderContentPresenterStyle}"/>
+                            <ScrollViewer x:Name="ContentElement" AutomationProperties.AccessibilityView="Raw" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsTabStop="False" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" Margin="{TemplateBinding BorderThickness}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled"/>
+                            <ContentControl x:Name="PlaceholderTextContentPresenter" Content="{TemplateBinding PlaceholderText}" Foreground="{ThemeResource TextBoxPlaceholderTextThemeBrush}" FontSize="{ThemeResource ContentControlFontSize}" IsTabStop="False" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Estilo de los botones del juego -->
+        <Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
+        <FontWeight x:Key="PhoneButtonFontWeight">Semibold</FontWeight>
+        <x:Double x:Key="TextStyleLargeFontSize">18.14</x:Double>
+        <Thickness x:Key="PhoneButtonContentPadding">9.5,0,9.5,3.5</Thickness>
+        <x:Double x:Key="PhoneButtonMinHeight">57.5</x:Double>
+        <x:Double x:Key="PhoneButtonMinWidth">109</x:Double>
+        <Thickness x:Key="PhoneTouchTargetOverhang">0,9.5</Thickness>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource BrandColorBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrandLighterColorBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource BrandForegroundColorBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource PhoneBorderThickness}"/>
+            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontWeight" Value="{ThemeResource PhoneButtonFontWeight}"/>
+            <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
+            <Setter Property="Padding" Value="{ThemeResource PhoneButtonContentPadding}"/>
+            <Setter Property="MinHeight" Value="{ThemeResource PhoneButtonMinHeight}"/>
+            <Setter Property="MinWidth" Value="{ThemeResource PhoneButtonMinWidth}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="Grid" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="Pressed" To="PointerOver">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="PointerOver" To="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="Pressed" To="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="Grid"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandForegroundColor}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandLightColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandLightColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandLightColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandDarkerColorBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </base:BasePage.Resources>
+
+    <!-- El título de la página está puesto por código en la barra de estado -->
+    
+    <!-- Contenido de la página -->
+    <Grid Margin="19">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Tablero de juego -->
+        <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderThickness="2,2,0,0" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[0][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[0][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[0][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[1][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[1][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[1][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[2][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[2][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[2][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" BorderThickness="2,2,0,0" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[0][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[0][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[0][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[1][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[1][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[1][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[2][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[2][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[2][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="2" BorderThickness="2,2,2,0" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[0][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[0][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[0][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[0][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[1][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[1][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[1][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[1][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[2][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[2][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[2][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[2][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" BorderThickness="2,2,0,0" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[3][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[3][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[3][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[4][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[4][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[4][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[5][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[5][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[5][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1" BorderThickness="2,2,0,0" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[3][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[3][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[3][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[4][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[4][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[4][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[5][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[5][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[5][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="2" BorderThickness="2,2,2,0" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[3][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[3][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[3][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[3][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[4][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[4][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[4][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[4][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[5][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[5][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[5][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[5][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="0" BorderThickness="2,2,0,2" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[6][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[6][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[6][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[7][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[7][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[7][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[8][0].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][0].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[8][1].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][1].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[8][2].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][2].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="1" BorderThickness="2,2,0,2" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[6][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[6][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[6][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[7][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[7][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[7][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[8][3].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][3].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[8][4].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][4].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[8][5].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][5].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="2" BorderThickness="2,2,2,2" BorderBrush="{StaticResource BrandLightColorBrush}" Background="{StaticResource PageBackgroundColorBrush}" Padding="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Cells[6][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cells[6][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Cells[6][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[6][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Cells[7][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Cells[7][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Cells[7][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[7][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+
+                        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Cells[8][6].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][6].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cells[8][7].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][7].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Cells[8][8].Digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NullableValueConverter}}" IsEnabled="{Binding Cells[8][8].NotFixed}" InputScope="Number" TextChanged="OnTextBoxChanged"/>
+                    </Grid>
+                </Border>                
+            </Grid>
+        </Viewbox>
+
+        <!-- Estado del juego -->
+        <TextBlock x:Name="StatusMessage" Grid.Row="1" Grid.ColumnSpan="3" FontSize="{StaticResource TextStyleLargeFontSize}" FontWeight="Semibold" Foreground="{StaticResource BrandDarkerColorBrush}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,12"/>
+        
+        <!-- Botones de juego -->
+        <Button Grid.Row="2" Grid.Column="0" Content="Nuevo" HorizontalAlignment="Stretch" Margin="2" Command="{Binding NewGameCommand}"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="Jugar" HorizontalAlignment="Stretch" Margin="2" Command="{Binding PlayGameCommand}"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="¿Es válido?" HorizontalAlignment="Stretch" Margin="2" Command="{Binding VerifyValidGameCommand}"/>
+
+        <!-- Botón de ayuda -->
+        <Button Grid.Row="3" Grid.Column="1" Content="Ayuda" HorizontalAlignment="Stretch" Margin="2" Command="{Binding ShowHelpCommand}"/>
+    </Grid>
+</base:BasePage>

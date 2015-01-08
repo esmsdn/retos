@@ -1,0 +1,35 @@
+﻿<Application
+    x:Class="SudokuApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SudokuApp"
+    xmlns:converters="using:SudokuApp.Views.Converters">
+
+    <Application.Resources>
+
+        <!-- Servicio que proporciona los vista-modelo a las vistas -->
+        <local:ServiceLocator x:Key="Locator"/>
+        
+        <!-- Conversores -->
+        <converters:NullableValueConverter x:Key="NullableValueConverter"/>
+
+        <!-- Colores -->
+        <!-- http://paletton.com/#uid=15-0u0kllllaFw0g0qFqFg0w0aF -->
+        <Color x:Key="BrandLighterColor">#F6A4AC</Color>
+        <SolidColorBrush x:Key="BrandLighterColorBrush" Color="{StaticResource BrandLighterColor}" />
+        <Color x:Key="BrandLightColor">#CD6771</Color>
+        <SolidColorBrush x:Key="BrandLightColorBrush" Color="{StaticResource BrandLightColor}" />
+        <Color x:Key="BrandColor">#A43741</Color>
+        <SolidColorBrush x:Key="BrandColorBrush" Color="{StaticResource BrandColor}" />
+        <Color x:Key="BrandDarkColor">#7B151F</Color>
+        <SolidColorBrush x:Key="BrandDarkColorBrush" Color="{StaticResource BrandDarkColor}" />
+        <Color x:Key="BrandDarkerColor">#520008</Color>
+        <SolidColorBrush x:Key="BrandDarkerColorBrush" Color="{StaticResource BrandDarkerColor}" />
+
+        <Color x:Key="BrandForegroundColor">#FFFFFF</Color>
+        <SolidColorBrush x:Key="BrandForegroundColorBrush" Color="{StaticResource BrandForegroundColor}" />
+
+        <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
+        <SolidColorBrush x:Key="PageBackgroundColorBrush" Color="{StaticResource PageBackgroundColor}" />
+    </Application.Resources>
+</Application>
