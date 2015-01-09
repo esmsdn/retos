@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Sudoku Test";
+    var cell = 0;
+}
+
+<section class="page page-main">
+    <h1 class="page__title">Sudoku Maker</h1>
+
+    <article class="sudoku">
+        @for (var i = 0; i < 3; i++){ // rows loop
+        <div class="sudoku__row">
+            @for (var j = 0; j < 3; j++)
+            { // columns loop
+            <div class="sudoku__column">
+                @for (var k = 0; k < 9; k++)
+                { // cells loop
+                    <div class="sudoku__cell js-cell" data-sk="@cell,@k" contenteditable="true"> </div>
+                }
+            </div>
+            cell++;
+            }
+        </div>
+        }
+    </article>
+</section>
+
+@Scripts.Render("~/Content/ts/Index.js")

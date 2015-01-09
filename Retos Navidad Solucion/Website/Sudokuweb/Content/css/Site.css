@@ -1,0 +1,88 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-size: 16px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #F4F4F4;
+}
+
+
+.sudoku {
+    border: 1px solid #1d1d1d;
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    display: table;
+    outline: 5px solid white;
+
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    transition: 1s;
+}
+
+.sudoku__row {
+    border: 1px solid #afafaf;
+    display: table-row;
+    width: 100%;
+}
+
+.sudoku__column {
+    border: 1px solid #afafaf;
+    display: table-cell;
+    width: 33.333333%;
+}
+
+.sudoku__cell {
+    background: #dfdfdf;
+    border: 3px solid white;
+    display: inline-block;
+    margin-right: -4px; /* inline-block bug */
+    height: 33.33333%;
+    width: 33.33333%;
+    text-align: center;
+    font-size: 2.5em;
+}
+
+.js-valid {
+    outline: 5px solid rgb(34, 202, 34);
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    transition: 1s;
+}
+
+.js-invalid {
+    outline: 5px solid rgb(255, 16, 16);
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    transition: 1s;
+}
+
+.js-has_number {
+    background: #6d6d6d;
+    color: #dfdfdf;
+}

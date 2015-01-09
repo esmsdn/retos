@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudokuweb", "Sudokuweb\Sudokuweb.csproj", "{A0B6C883-24D8-414C-AC52-6252D74F75BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudokuweb.Tests", "Sudokuweb.Tests\Sudokuweb.Tests.csproj", "{069553E3-8C13-4A34-B813-37FA8FBB9D46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0B6C883-24D8-414C-AC52-6252D74F75BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B6C883-24D8-414C-AC52-6252D74F75BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B6C883-24D8-414C-AC52-6252D74F75BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B6C883-24D8-414C-AC52-6252D74F75BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{069553E3-8C13-4A34-B813-37FA8FBB9D46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{069553E3-8C13-4A34-B813-37FA8FBB9D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{069553E3-8C13-4A34-B813-37FA8FBB9D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{069553E3-8C13-4A34-B813-37FA8FBB9D46}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
