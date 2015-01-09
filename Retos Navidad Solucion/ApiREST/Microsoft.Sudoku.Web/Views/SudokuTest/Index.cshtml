@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "View";
+}
+
+<script type="text/javascript">
+    
+
+        $.connection.hub.start().done(function (item) {
+            $('<li>Token: ' + item.token + '</li>').appendTo($('#result'));
+            $('<li>transport: ' + item.transport.name + '</li>').appendTo($('#result'));
+            $('<li>host: ' + item.host + '</li>').appendTo($('#result'));
+            
+        });
+
+        $(document).ready(function () {
+            $('#send').click(isvalid);
+        });
+
+        var isvalid = function () {
+            var value = $.connection.sudokuHub.server.isValidGame($('#sudoku').val());
+            alert(value);
+        }
+
+    
+</script>
+
+<h2>View</h2>
+
+<ul id="result"></ul>
+<input id="send" type="button" value="send!" />
+<input id="sudoku" type="text" />
